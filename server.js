@@ -16,3 +16,6 @@ app.use(
 app.use(bodyParser.json());
 // I get the mongoURI setup in the config/keys.js file and save it in a variable
 const db = require("./config/keys").mongoURI;
+
+// I try to open a connection to MongoDB using mongoose
+mongoose
