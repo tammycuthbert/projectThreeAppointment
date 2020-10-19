@@ -21,3 +21,8 @@ router.post("/register", (req, res) => {
     // We store our errors and the boolean isValid in a new object, set by the validateLoginInput function (validation/register.js)
     const { errors, isValid } = validateRegisterInput(req.body);
 });
+
+// We check if the validation returned any error
+if (!isValid) {
+    return res.status(400).json(errors);
+}
