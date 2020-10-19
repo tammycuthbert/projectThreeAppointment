@@ -31,3 +31,6 @@ require('./config/passport')(passport);
 
 // Routes
 app.use("/api/users", users);
+
+// I setup the port I want to deploy our app on, so I specify Heroku's port here and a default port in case I want to use another port anytime
+const port = process.env.PORT || 5000; 
