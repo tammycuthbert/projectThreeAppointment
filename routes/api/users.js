@@ -42,3 +42,19 @@ if (!isValid) {
             email: req.body.email,
             password: req.body.password
         });
+
+
+        // We hash the password before saving it in the database
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                if (err) { throw err; }
+                newUser.password = hash;
+                newUser
+                    .save()
+                    .then(user => res.json(user))
+                    .catch(err => console.log(err));
+            });
+        });
+    }
+});
+});
