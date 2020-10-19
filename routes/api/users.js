@@ -8,3 +8,5 @@ const keys = require('../../config/keys');
 
 // We load the input validation from our validation scripts (register & login)
 const validateRegisterInput = require('../../validation/register')
+
+const validateLoginInput = require("../../validation/login");
