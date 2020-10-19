@@ -26,3 +26,11 @@ router.post("/register", (req, res) => {
 if (!isValid) {
     return res.status(400).json(errors);
 }
+
+   // If the validation came back without any error, we check if the user already exist in the database
+   User
+   .findOne({ email: req.body.email }) // We try to find an similar email to the one entered in the email field
+   .then(user => {
+       if (user) { // If it returned an object (user), which means it found a user using the same email address, ...
+           return res.status(400).json({ email: "Email already exists" }); // ... we exit and return an error 400 along with a message 
+       }
