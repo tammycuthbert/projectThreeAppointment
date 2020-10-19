@@ -19,3 +19,5 @@ const db = require("./config/keys").mongoURI;
 
 // I try to open a connection to MongoDB using mongoose
 mongoose
+
+.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }) // Tries to connect to the database using the 'db' variable containing our mongoURI from 'keys.js' file 
