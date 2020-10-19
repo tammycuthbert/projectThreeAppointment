@@ -57,4 +57,59 @@ if (!isValid) {
         });
     }
 });
+
+
+// @route POST api/users/login
+// @desc Login user and return JWT token
+// @access Public
+router.post("/login", (req, res) => {
+    // We store our errors and the boolean isValid in a new object, set by the validateLoginInput function (validation/register.js)
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    // We check if the validation returned any error
+    if (!isValid) {
+        return res.status(404).json(errors);
+    }
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+     // If the validation came back without any error, we try to find the user using the email entered in the login 'email' field
+    User
+        .findOne({ email })
+        .then(user => {
+            if (!user) { // We the user doesn't exist, we return an error along with a message
+                return res.status(400).json({ emailnotfound: "Email not found" });
+            } else { // Otherwise (it found a user with the same email) ...
+                // We compare the password entered in the 'password' field with the one in the database, associated with the email
+                bcrypt
+                    .compare(password, user.password)
+                    .then(isMatch => { 
+                        if (isMatch) { // If it is a match ...
+                            // ... we create a JWT (Json Web Token) Payload with the user ID and name
+                            const payload = {
+                                id: user.id,
+                                name: user.name
+                            };
+
+                            // Then we sign the token
+                            jwt.sign(
+                                payload,
+                                keys.secretOrKey,
+                                { expiresIn: 31556926 }, // The equivalent to 1 year in seconds
+                                (err, token) => {
+                                    res.json({
+                                        success: true,
+                                        token: "Bearer " + token
+                                    });
+                                }
+                            );
+                        } else {
+                            return res.status(400).json({ passwordincorrect: "Password incorrect" });
+                        }
+                    });
+            }
+        });
 });
+
+module.exports = router; 
