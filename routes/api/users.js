@@ -34,3 +34,11 @@ if (!isValid) {
        if (user) { // If it returned an object (user), which means it found a user using the same email address, ...
            return res.status(400).json({ email: "Email already exists" }); // ... we exit and return an error 400 along with a message 
        }
+
+
+       else { // Otherwise ...
+        const newUser = new User({ // ... we create a new user following the User schema from '/models/user.js' 
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        });
