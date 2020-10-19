@@ -10,3 +10,6 @@ const keys = require('../../config/keys');
 const validateRegisterInput = require('../../validation/register')
 
 const validateLoginInput = require("../../validation/login");
+
+// We load the User model from our models script
+const User = require('../../models/user');
