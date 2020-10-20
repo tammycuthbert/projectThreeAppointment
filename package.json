@@ -1,5 +1,5 @@
 {
-    "name": "mern-appointment-auth",
+    "name": "project-three-appointment",
     "version": "1.0.0",
     "description": "App where any user can set up appointments online and/or offline. Employees can login to their respective department and create their own schedule.",
     "main": "server.js",
