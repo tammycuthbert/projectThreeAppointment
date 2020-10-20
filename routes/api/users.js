@@ -72,7 +72,7 @@ router.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-     // If the validation came back without any error, we try to find the user using the email entered in the login 'email' field
+    // If the validation came back without any error, we try to find the user using the email entered in the login 'email' field
     User
         .findOne({ email })
         .then(user => {
