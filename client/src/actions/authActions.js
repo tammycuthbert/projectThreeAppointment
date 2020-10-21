@@ -20,7 +20,7 @@ export const registerUser = (userData, history) => dispatch => {
 // I define the action for when the user logs in, and I get the user token
 export const loginUser = userData => dispatch => {
     axios
-        .post('/api/users/loginUser', userData)
+        .post('/api/users/login', userData)
         .then(res => {
             // Save to localStorage
             // Set token to localStorage
