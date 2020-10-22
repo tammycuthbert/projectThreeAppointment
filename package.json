@@ -19,7 +19,8 @@
         "appointment-app",
         "schedule",
         "scheduling",
-        "scheduling-app"
+        "scheduling-app",
+        "heroku"
     ],
     "author": "Tammy Cuthbert",
     "license": "MIT",

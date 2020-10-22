@@ -20,7 +20,7 @@ const db = require("./config/keys").mongoURI;
 // I try to open a connection to MongoDB using mongoose
 mongoose
 .connect(db, { useNewUrlParser: true, useUnifiedTopology: true }) // Tries to connect to the database using the 'db' variable containing our mongoURI from 'keys.js' file 
-.then(() => console.log("Connection to MongoDB established!")) // If it goes through, I write a succcess message in the console
+.then(() => console.log("Connection to MongoDB established!")) // If it goes through, I write a success message in the console
 .catch(err => console.log(err)); // If there is an error during the connection process, I write the error in the console
 // Passport middleware
 app.use(passport.initialize());
@@ -33,7 +33,7 @@ app.use("/api/users", users);
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
-    app.use(express.static('client/build'));
+    app.use(express.static(path.join(__dirname, './client/build')));
   
     // Express serve up index.html file if it doesn't recognize route
     const path = require('path');
