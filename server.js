@@ -19,7 +19,6 @@ const db = require("./config/keys").mongoURI;
 
 // I try to open a connection to MongoDB using mongoose
 mongoose
-
 .connect(db, { useNewUrlParser: true, useUnifiedTopology: true }) // Tries to connect to the database using the 'db' variable containing our mongoURI from 'keys.js' file 
 .then(() => console.log("Connection to MongoDB established!")) // If it goes through, I write a succcess message in the console
 .catch(err => console.log(err)); // If there is an error during the connection process, I write the error in the console
@@ -31,6 +30,17 @@ require('./config/passport')(passport);
 
 // Routes
 app.use("/api/users", users);
+
+if (process.env.NODE_ENV === 'production') {
+    // Express will serve up production assets
+    app.use(express.static('client/build'));
+  
+    // Express serve up index.html file if it doesn't recognize route
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 // I setup the port I want to deploy my app on, so I specify Heroku's port here and a default port in case I want to use another port anytime
 const port = process.env.PORT || 5000; 
