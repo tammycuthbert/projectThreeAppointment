@@ -45,4 +45,6 @@ if (process.env.NODE_ENV === 'production') {
 // I setup the port I want to deploy my app on, so I specify Heroku's port here and a default port in case I want to use another port anytime
 const port = process.env.PORT || 5000; 
 
-app.listen(port, () => console.log(`Sever up and running on port ${port}!`));
+app.listen(port, () => console.log(`Server up and running on port ${port}!`));
+console.log(app.router);
+console.log(app.map(app.routes + ""));
